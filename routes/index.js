@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
   var mapData = req.body;
-
+  takeScreenshot
    // do something with mapData
 
    res.send(
