@@ -1,5 +1,3 @@
-var takeScreenshot = require('../models/screenshot');
-
 var express = require('express');
 var router = express.Router();
 
@@ -10,8 +8,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
   var mapData = req.body;
-  // takeScreenshot
-   // do something with mapData
+  console.log(mapData);
+  // Use mapData to generate map
+  // take screenshot
+  var takeScreenshot = require('../models/screenshot');
 
    res.send(
      {
