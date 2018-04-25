@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* GET screenshot */
 router.get('/', (req, res, next) => {
-  res.render('index');
+  res.render('index', {myVar: 56});
 });
 
 router.post('/', (req, res) => {
