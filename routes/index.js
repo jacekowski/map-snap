@@ -4,8 +4,7 @@ const router = express.Router();
 
 /* GET screenshot */
 router.get('/', (req, res, next) => {
-  const mapData = { test: 'data' };
-  res.render('index', { params: mapData });
+  res.render('index');
 });
 
 router.post('/', (req, res) => {

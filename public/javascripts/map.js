@@ -1,5 +1,4 @@
 $(document).ready(() => {
-  // console.log(sampleData);
   const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
   const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
   const MAPBOX_USERNAME = 'arelenglish';
