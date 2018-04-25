@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function (){
   // console.log(sampleData);
   const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
   const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
@@ -20,35 +20,35 @@ $(document).ready(function(){
   viewer.terrainProvider = Cesium.createWorldTerrain();
   // viewer.scene.globe.depthTestAgainstTerrain = true;
 
-  const airportIcon = "/images/airport.png";
-  const waypointIcon = "/images/waypoint.png";
+  const airportIcon = '/images/airport.png';
+  const waypointIcon = '/images/waypoint.png';
   const billboards = new Cesium.BillboardCollection();
   function renderMap(data) {
-    const top_airport_visit_count = data["max_count"];
+    const top_airport_visit_count = data['max_count'];
     Cesium.GeoJsonDataSource.load(data, {
       stroke: Cesium.Color.fromBytes(0, 230, 240, 40),
       markerColor: Cesium.Color.fromHsl(0, 0, 0, 0.01)
-    }).then(function(dataSource) {
+    }).then(function (dataSource) {
       viewer.dataSources.add(dataSource);
       viewer.zoomTo(dataSource);
       const entities = dataSource.entities.values;
       for (const i = 0; i < entities.length; i++) {
         const entity = entities[i];
         const feature_type = entity.properties.feature_type._value;
-        if (feature_type === "airport") {
+        if (feature_type === 'airport') {
           setAirportIcon(entity, top_airport_visit_count);
           entity.description = '\
           <p>Number of visits: ' + entity.properties.count._value + '</p>\
           <p>Identifier: ' + entity.properties.identifier._value + '</p>';
-        } else if (feature_type === "waypoint") {
+        } else if (feature_type === 'waypoint') {
           setWaypointIcon(entity, top_airport_visit_count);
           entity.name = entity.properties.identifier._value;
           entity.description = '<p>Number of visits: ' + entity.properties.count._value + '</p>';
-        } else if (feature_type === "line") {
+        } else if (feature_type === 'line') {
           if (entity.name === undefined) {
-            entity.name = "Flight";
+            entity.name = 'Flight';
           }
-          entity.description = "";
+          entity.description = '';
         }
       }
     })
