@@ -12,6 +12,6 @@ driver.create({ path: require('slimerjs').path }, function(err, browser) {
           }, 15000);
         });
       });
-	  });
+    });
   });
 });
