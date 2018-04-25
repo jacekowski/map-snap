@@ -31,7 +31,7 @@ then
         then
             SLIMERJSLAUNCHER="/Applications/Firefox.app/Contents/MacOS/firefox"
         else
-            echo "SLIMERJSLAUNCHER environment variable is missing. Set it with the path to Firefox"
+            echo "SLIMERJSLAUNCHER environment constiable is missing. Set it with the path to Firefox"
             exit 1
         fi
     fi
@@ -39,7 +39,7 @@ fi
 
 if [ ! -x "$SLIMERJSLAUNCHER" ]
 then
-    echo "SLIMERJSLAUNCHER environment variable does not contain an executable path. Set it with the path to Firefox"
+    echo "SLIMERJSLAUNCHER environment constiable does not contain an executable path. Set it with the path to Firefox"
     exit 1
 fi
 
@@ -97,15 +97,15 @@ function showHelp() {
     echo ""
 }
 
-# retrieve list of existing environment variable, because Mozilla doesn't provide an API to get this
+# retrieve list of existing environment constiable, because Mozilla doesn't provide an API to get this
 # list
-LISTVAR=""
-ENVVAR=`env`;
+LISTconst=""
+ENVconst=`env`;
 OLDIFS=$IFS;
 IFS=$'\n';
-for v in $ENVVAR; do
-    IFS='=' read -a var <<< "$v"
-    LISTVAR="$LISTVAR,${var[0]}"
+for v in $ENVconst; do
+    IFS='=' read -a const <<< "$v"
+    LISTconst="$LISTconst,${const[0]}"
 done
 IFS=$OLDIFS;
 
@@ -150,10 +150,10 @@ else
     PROFILE="-purgecaches"
 fi
 
-# put all arguments in a variable, to have original arguments before their transformation
+# put all arguments in a constiable, to have original arguments before their transformation
 # by Mozilla
 export __SLIMER_ARGS="$@"
-export __SLIMER_ENV="$LISTVAR"
+export __SLIMER_ENV="$LISTconst"
 export __SLIMER_EXITCODEFILE=`mktemp -q /tmp/slimerjs-exit-XXXXXXXX`
 if [ "$IN_CYGWIN" == 1 ]; then
     __SLIMER_EXITCODEFILE=`cygpath -w $__SLIMER_EXITCODEFILE`

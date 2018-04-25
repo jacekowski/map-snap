@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET screenshot */
 router.get('/', function(req, res, next) {
-  var mapData = {
+  const mapData = {
     "type": "FeatureCollection",
     "max_count": 4,
     "features": [
@@ -293,11 +293,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  var mapData = req.body;
+  const mapData = req.body;
   render('index', {params: mapData})
   // Use mapData to generate map
   // take screenshot
-  var takeScreenshot = require('../models/screenshot');
+  const takeScreenshot = require('../models/screenshot');
 
    res.send(
      {

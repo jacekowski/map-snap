@@ -1,11 +1,11 @@
 $(document).ready(function(){
   // console.log(sampleData);
-  var MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
-  var MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
-  var MAPBOX_USERNAME = 'arelenglish';
-  var defaultMap = 'https://api.mapbox.com/styles/v1/' + MAPBOX_USERNAME + '/' + MAPBOX_STYLE_ID + '/tiles/256/{z}/{x}/{y}?access_token=' + MAPBOX_ACCESS_TOKEN;
+  const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
+  const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
+  const MAPBOX_USERNAME = 'arelenglish';
+  const defaultMap = 'https://api.mapbox.com/styles/v1/' + MAPBOX_USERNAME + '/' + MAPBOX_STYLE_ID + '/tiles/256/{z}/{x}/{y}?access_token=' + MAPBOX_ACCESS_TOKEN;
 
-  var viewer = new Cesium.Viewer('cesiumContainer', {
+  const viewer = new Cesium.Viewer('cesiumContainer', {
     timeline: false,
     animation: false,
     geocoder: false,
@@ -20,21 +20,21 @@ $(document).ready(function(){
   viewer.terrainProvider = Cesium.createWorldTerrain();
   // viewer.scene.globe.depthTestAgainstTerrain = true;
 
-  var airportIcon = "/images/airport.png";
-  var waypointIcon = "/images/waypoint.png";
-  var billboards = new Cesium.BillboardCollection();
+  const airportIcon = "/images/airport.png";
+  const waypointIcon = "/images/waypoint.png";
+  const billboards = new Cesium.BillboardCollection();
   function renderMap(data) {
-    var top_airport_visit_count = data["max_count"];
+    const top_airport_visit_count = data["max_count"];
     Cesium.GeoJsonDataSource.load(data, {
       stroke: Cesium.Color.fromBytes(0, 230, 240, 40),
       markerColor: Cesium.Color.fromHsl(0, 0, 0, 0.01)
     }).then(function(dataSource) {
       viewer.dataSources.add(dataSource);
       viewer.zoomTo(dataSource);
-      var entities = dataSource.entities.values;
-      for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-        var feature_type = entity.properties.feature_type._value;
+      const entities = dataSource.entities.values;
+      for (const i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+        const feature_type = entity.properties.feature_type._value;
         if (feature_type === "airport") {
           setAirportIcon(entity, top_airport_visit_count);
           entity.description = '\
@@ -72,7 +72,7 @@ $(document).ready(function(){
   }
 
   function setOpacity(top_airport_visit_count, entity) {
-    var opacity = Math.max((entity.properties.count/top_airport_visit_count) * 12, 0.3)
+    const opacity = Math.max((entity.properties.count/top_airport_visit_count) * 12, 0.3)
     if (opacity > 1) {
       opacity = 1
     }
