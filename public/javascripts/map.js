@@ -1,5 +1,4 @@
 $(document).ready(() => {
-  alert(myVar);
   const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
   const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
   const MAPBOX_USERNAME = 'arelenglish';
@@ -20,9 +19,7 @@ $(document).ready(() => {
   viewer.terrainProvider = Cesium.createWorldTerrain();
   // viewer.scene.globe.depthTestAgainstTerrain = true;
 
-  const airportIcon = '/images/airport.png';
-  const waypointIcon = '/images/waypoint.png';
-  const billboards = new Cesium.BillboardCollection();
+  var billboards = new Cesium.BillboardCollection();
   function renderMap(data) {
     const top_airport_visit_count = data.max_count;
     Cesium.GeoJsonDataSource.load(data, {
@@ -31,10 +28,10 @@ $(document).ready(() => {
     }).then((dataSource) => {
       viewer.dataSources.add(dataSource);
       viewer.zoomTo(dataSource);
-      const entities = dataSource.entities.values;
-      for (const i = 0; i < entities.length; i++) {
-        const entity = entities[i];
-        const feature_type = entity.properties.feature_type._value;
+      var entities = dataSource.entities.values;
+      for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        var feature_type = entity.properties.feature_type._value;
         if (feature_type === 'airport') {
           setAirportIcon(entity, top_airport_visit_count);
           entity.description = `\
@@ -58,7 +55,7 @@ $(document).ready(() => {
   function setAirportIcon(entity, top_airport_visit_count) {
     billboards.add({
       position: entity.position.getValue(viewer.clock.currentTime),
-      image: airportIcon,
+      image: '/images/airport.png',
       color: new Cesium.Color.fromHsl(0, 0, 1, setOpacity(top_airport_visit_count, entity)),
     });
   }
@@ -66,18 +63,28 @@ $(document).ready(() => {
   function setWaypointIcon(entity, top_airport_visit_count) {
     billboards.add({
       position: entity.position.getValue(viewer.clock.currentTime),
-      image: waypointIcon,
+      image: '/images/waypoint.png',
       color: new Cesium.Color.fromHsl(0, 0, 1, setOpacity(top_airport_visit_count, entity)),
     });
   }
 
   function setOpacity(top_airport_visit_count, entity) {
-    const opacity = Math.max((entity.properties.count / top_airport_visit_count) * 12, 0.3);
+    var opacity = Math.max((entity.properties.count / top_airport_visit_count) * 12, 0.3);
     if (opacity > 1) {
       opacity = 1;
     }
     return opacity;
   }
 
-  renderMap(data);
+  $.ajax({
+    url: 'http://localhost:3000/api/v1/users/' + userId + '/flights',
+    type: 'GET',
+    data: {
+      format: 'json'
+    },
+    success: (response) => {
+      renderMap(response);
+    }
+  });
+
 });
