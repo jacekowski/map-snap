@@ -10,7 +10,7 @@ router.get('/:user_id', (req, res, next) => {
 
 router.post('/:user_id', (req, res) => {
   const userId = req.params["user_id"]
-  screenshotService.takeScreenshot(userId)
+  const image = screenshotService.takeScreenshot(userId)
   // Turn screenshot code into function and make user_id an argument
   // pass in userId and go from there.
   // take screenshot
@@ -18,7 +18,7 @@ router.post('/:user_id', (req, res) => {
   res.send({
     response: {
       success: true,
-      image_url: 'https://www.map_image.amazon.com',
+      image_url: image,
     },
   });
 });
