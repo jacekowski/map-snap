@@ -6,10 +6,14 @@ $(document).ready(() => {
 
   const viewer = new Cesium.Viewer('cesiumContainer', {
     timeline: false,
+    navigationInstructionsInitiallyVisible: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    sceneModePicker: false,
+    homeButton: false,
     animation: false,
     geocoder: false,
     baseLayerPicker: false,
-    vrButton: true,
     selectionIndicator: false,
     imageryProvider: new Cesium.UrlTemplateImageryProvider({
       url: defaultMap,
