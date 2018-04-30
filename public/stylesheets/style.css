@@ -15,3 +15,7 @@ a {
   min-width: 100%;
   width: 100%;
 }
+
+.cesium-viewer-bottom {
+  opacity: 0;
+}
