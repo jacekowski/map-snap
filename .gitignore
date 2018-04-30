@@ -19,6 +19,8 @@ package-lock.json
 *.log
 *.gz
 
+# Heroku local environment variables
+.env
 
 # Coveralls
 coverage

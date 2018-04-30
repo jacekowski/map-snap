@@ -70,7 +70,7 @@ $(document).ready(() => {
   }
 
   $.ajax({
-    url: 'https://www.arelplane.com/api/v1/users/' + userId + '/flights',
+    url: 'https://www.arelplane.com/api/v1/users/' + userID + '/flights',
     type: 'GET',
     data: {
       format: 'json'
