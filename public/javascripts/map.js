@@ -21,7 +21,6 @@ $(document).ready(() => {
   });
 
   viewer.terrainProvider = Cesium.createWorldTerrain();
-  // viewer.scene.globe.depthTestAgainstTerrain = true;
 
   var billboards = new Cesium.BillboardCollection();
   function renderMap(data) {
@@ -38,18 +37,8 @@ $(document).ready(() => {
         var feature_type = entity.properties.feature_type._value;
         if (feature_type === 'airport') {
           setAirportIcon(entity, top_airport_visit_count);
-          entity.description = `\
-          <p>Number of visits: ${entity.properties.count._value}</p>\
-          <p>Identifier: ${entity.properties.identifier._value}</p>`;
         } else if (feature_type === 'waypoint') {
           setWaypointIcon(entity, top_airport_visit_count);
-          entity.name = entity.properties.identifier._value;
-          entity.description = `<p>Number of visits: ${entity.properties.count._value}</p>`;
-        } else if (feature_type === 'line') {
-          if (entity.name === undefined) {
-            entity.name = 'Flight';
-          }
-          entity.description = '';
         }
       }
     });
@@ -81,7 +70,7 @@ $(document).ready(() => {
   }
 
   $.ajax({
-    url: 'http://localhost:3000/api/v1/users/' + userId + '/flights',
+    url: 'https://www.arelplane.com/api/v1/users/' + userId + '/flights',
     type: 'GET',
     data: {
       format: 'json'
