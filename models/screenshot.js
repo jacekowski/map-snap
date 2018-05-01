@@ -15,6 +15,10 @@ module.exports = {
         ]
       });
       const page = await browser.newPage();
+      await page.setViewport({
+        width: 690,
+        height: 300
+      });
       await page.goto(
         'https://arelplane-map-snap.herokuapp.com/' + userID,
         {
