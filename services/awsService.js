@@ -7,8 +7,8 @@ let s3 = new aws.S3({
 });
 
 module.exports = {
-  upload: (image, userID, timestamp) => {
-    var photoKey = 'map-photos/' + userID + '/' + 'map_' + timestamp + '.png';
+  upload: (image, storyID) => {
+    var photoKey = 'map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
     s3.upload({
       Bucket: awsBucket,
       Key: photoKey,

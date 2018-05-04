@@ -4,20 +4,29 @@ const screenshotService = require('../models/screenshot');
 const router = express.Router();
 
 /* GET screenshot */
-router.get('/:user_id', (req, res, next) => {
-  res.render('index', {params: req.params});
+router.get('/story/:story_id', (req, res, next) => {
+  res.render('story/index', {params: req.params});
 });
 
-router.post('/:user_id', (req, res) => {
-  const userID = req.params["user_id"]
-  const imageURL = screenshotService.takeScreenshot(userID)
+router.post('/story/:story_id', (req, res) => {
+  if (req.query.auth === process.env.API_KEY) {
+    const storyID = req.params["story_id"]
+    const imageURL = screenshotService.takeScreenshot(storyID)
 
-  res.send({
-    response: {
-      success: true,
-      image_url: imageURL,
-    },
-  });
+    res.status(200).send({
+      response: {
+        success: true,
+        image_url: imageURL
+      }
+    });
+  } else {
+    res.status(403).send({
+      response: {
+        success: false,
+        image_url: null
+      }
+    });
+  }
 });
 
 module.exports = router;
