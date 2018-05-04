@@ -19,7 +19,7 @@ module.exports = {
         height: 300
       });
       await page.goto(
-        'https://arelplane-map-snap.herokuapp.com/story/' + storyID,
+        'http://localhost:8080/story/' + storyID,
         {
           "waitUntil": "networkidle2",
           timeout: 0
@@ -28,6 +28,6 @@ module.exports = {
       awsService.upload(await page.screenshot(), storyID);
       await browser.close();
     })();
-    return 'https://s3.amazonaws.com/' + process.env.AWS_BUCKET + 'map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
+    return 'https://s3.amazonaws.com/' + process.env.AWS_BUCKET + '/map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
   }
 }
