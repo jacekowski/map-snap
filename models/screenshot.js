@@ -19,7 +19,7 @@ module.exports = {
         height: 300
       });
       await page.goto(
-        'http://localhost:8080/story/' + storyID,
+        process.env.MAPSNAP_ROOT_URL + '/story/' + storyID + "?auth=" + process.env.API_KEY,
         {
           "waitUntil": "networkidle2",
           timeout: 0

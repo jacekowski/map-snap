@@ -5,7 +5,11 @@ const router = express.Router();
 
 /* GET screenshot */
 router.get('/story/:story_id', (req, res, next) => {
-  res.render('story/index', {params: req.params});
+  if (req.query.auth === process.env.API_KEY) {
+    res.render('story/index', {params: req.params});
+  } else {
+    res.status(403).render('error', {message: "You're not authorized to view this page."});
+  }
 });
 
 router.post('/story/:story_id', (req, res) => {
