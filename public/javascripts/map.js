@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2l6ZzNrNHZ3MDB1cDMzb3dqdmh3emhjbSJ9.1WoDWsWNnIg-Wq8LPf1j-A';
+  const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2ptemJjdnp0MHU5ZzNrcjJqNjdncndzMSJ9.pmanP95PfBo_4GgDmcN_9Q';
   const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
   const MAPBOX_USERNAME = 'arelenglish';
   const defaultMap = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_ACCESS_TOKEN}`;
@@ -70,7 +70,7 @@ $(document).ready(() => {
   }
 
   $.ajax({
-    url: 'https://www.arelplane.com/api/v1/stories/' + storyID + '/flights',
+    url: 'http://localhost:3000/api/v1/stories/' + storyID + '/flights',
     type: 'GET',
     data: {
       format: 'json'
