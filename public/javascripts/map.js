@@ -2,7 +2,7 @@ $(document).ready(() => {
   const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYXJlbGVuZ2xpc2giLCJhIjoiY2ptemJjdnp0MHU5ZzNrcjJqNjdncndzMSJ9.pmanP95PfBo_4GgDmcN_9Q';
   const MAPBOX_STYLE_ID = 'cj68kq87a1gqk2srsnul2iwee';
   const MAPBOX_USERNAME = 'arelenglish';
-  const defaultMap = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_ACCESS_TOKEN}`;
+  const defaultMap = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${MAPBOX_ACCESS_TOKEN}`;
 
   const viewer = new Cesium.Viewer('cesiumContainer', {
     timeline: false,
@@ -20,6 +20,7 @@ $(document).ready(() => {
     }),
   });
 
+  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4OTQwMTEyZC05NzY0LTQyYjEtYWYwYi04ZjYzNzkzMThlYzkiLCJpZCI6MzgwMiwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODk0NTM2M30.SxDWnMe3X-TnYGd6bYeiiZZMe9zP3Y9bu8F4O43eqSA';
   viewer.terrainProvider = Cesium.createWorldTerrain();
 
   var billboards = new Cesium.BillboardCollection();
