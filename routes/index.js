@@ -12,6 +12,10 @@ router.get('/story/:story_id', (req, res, next) => {
   }
 });
 
+router.get('/map.js', (req, res, next) => {
+    res.render('story/map', {params: req.params, env: process.env});
+});
+
 router.post('/story/:story_id', (req, res) => {
   if (req.query.auth === process.env.API_KEY) {
     const storyID = req.params["story_id"]

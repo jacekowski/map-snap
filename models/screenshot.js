@@ -14,6 +14,12 @@ module.exports = {
         ]
       });
       const page = await browser.newPage();
+      page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+      await page.setRequestInterception(true);
+      page.on("request", request => {
+        console.log('REQUEST LOG:',request.url());
+        request.continue();
+      });
       await page.setViewport({
         width: 690,
         height: 300
@@ -21,13 +27,16 @@ module.exports = {
       await page.goto(
         process.env.MAPSNAP_ROOT_URL + '/story/' + storyID + "?auth=" + process.env.API_KEY,
         {
-          "waitUntil": "networkidle2",
-          timeout: 0
+          "waitUntil": "load",
+          timeout: 30000
         }
       );
+      console.log('loaded waiting 30s');
+      await page.waitFor(30000);
+      console.log('wait finished uploading');
       awsService.upload(await page.screenshot(), storyID);
       await browser.close();
     })();
-    return 'https://s3.amazonaws.com/' + process.env.AWS_BUCKET + '/map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
+    return process.env.AWS_S3_ENDPOINT + '/' + process.env.AWS_BUCKET + '/map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
   }
 }
