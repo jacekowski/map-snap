@@ -71,7 +71,7 @@ $(document).ready(() => {
   }
 
   $.ajax({
-    url: 'https://www.arelplane.com/api/v1/stories/' + storyID + '/flights?auth=70e5536d752349a0dc43f07d73d07e9b',
+    url: '<%= env["ARELPLANE_ROOT_URL"] %>/api/v1/stories/' + storyID + '/flights?auth=<%= env["TEMP_STORIES_API_KEY"] %>',
     type: 'GET',
     data: {
       format: 'json'
