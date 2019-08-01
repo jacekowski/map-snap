@@ -15,6 +15,9 @@ $(document).ready(() => {
     geocoder: false,
     baseLayerPicker: false,
     selectionIndicator: false,
+    targetFrameRate: 5,
+    requestRenderMode : true,
+    maximumRenderTimeChange : Infinity,
     imageryProvider: new Cesium.UrlTemplateImageryProvider({
       url: defaultMap,
     }),
@@ -44,6 +47,7 @@ $(document).ready(() => {
       }
     });
     viewer.scene.primitives.add(billboards);
+    viewer.scene.requestRender();
   }
 
   function setAirportIcon(entity, top_airport_visit_count) {

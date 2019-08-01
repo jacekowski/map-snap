@@ -27,13 +27,10 @@ module.exports = {
       await page.goto(
         process.env.MAPSNAP_ROOT_URL + '/story/' + storyID + "?auth=" + process.env.API_KEY,
         {
-          "waitUntil": "load",
-          timeout: 30000
+          "waitUntil": "networkidle2",
+          timeout: 300000
         }
       );
-      console.log('loaded waiting 30s');
-      await page.waitFor(30000);
-      console.log('wait finished uploading');
       awsService.upload(await page.screenshot(), storyID);
       await browser.close();
     })();
