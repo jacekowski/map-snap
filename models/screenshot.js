@@ -34,6 +34,6 @@ module.exports = {
       awsService.upload(await page.screenshot(), storyID);
       await browser.close();
     })();
-    return 'https://s3.amazonaws.com/' + process.env.AWS_BUCKET + '/map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
+    return process.env.AWS_S3_ENDPOINT + '/' + process.env.AWS_BUCKET + '/map-photos/' + 'story_' + storyID + '/' + 'story_map.png';
   }
 }
