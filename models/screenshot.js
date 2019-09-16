@@ -31,6 +31,9 @@ module.exports = {
           timeout: 300000
         }
       );
+      console.log('loaded waiting 30s');
+      await page.waitFor(30000);
+      console.log('wait finished uploading');
       awsService.upload(await page.screenshot(), storyID);
       await browser.close();
     })();
